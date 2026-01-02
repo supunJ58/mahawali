@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Mahaweli - Sri Lanka's Hidden Treasures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --terracotta: #D4745C;
+            --deep-green: #2C5530;
+            --golden: #D4A574;
+            --cream: #F5F1E8;
+            --charcoal: #2A2A2A;
+            --sage: #8B9B7F;
+            --burnt-orange: #C85A3F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--charcoal);
+            background: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--deep-green) 0%, var(--terracotta) 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            color: white;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            text-shadow: 4px 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 300;
+            letter-spacing: 4px;
+            opacity: 0.95;
+            animation: fadeInUp 1.2s ease-out 0.3s backwards;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translate(-50%, 0);
+            }
+            50% {
+                transform: translate(-50%, -10px);
+            }
+        }
+
+        .intro-section {
+            padding: 120px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .intro-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--deep-green);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .intro-section p {
+            font-size: 1.2rem;
+            color: var(--charcoal);
+            opacity: 0.85;
+            line-height: 1.8;
+        }
+
+        .location-section {
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .location-section:nth-child(even) {
+            background: linear-gradient(to bottom, transparent, rgba(212, 116, 92, 0.05), transparent);
+        }
+
+        .location-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 100px;
+        }
+
+        .location-container:nth-child(even) {
+            direction: rtl;
+        }
+
+        .location-container:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .location-image {
+            position: relative;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.15);
+            transform: rotate(-2deg);
+            transition: transform 0.6s ease;
+        }
+
+        .location-container:nth-child(even) .location-image {
+            transform: rotate(2deg);
+        }
+
+        .location-image:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .location-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .location-image:hover img {
+            transform: scale(1.1);
+        }
+
+        .location-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+        }
+
+        .location-content {
+            padding: 20px;
+        }
+
+        .location-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            font-weight: 900;
+            color: var(--golden);
+            opacity: 0.2;
+            line-height: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .location-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: var(--deep-green);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .location-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--charcoal);
+            opacity: 0.85;
+        }
+
+        .directions-box {
+            background: var(--deep-green);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .directions-box::before {
+            content: '📍';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            opacity: 0.2;
+        }
+
+        .directions-box h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .directions-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .directions-box li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .directions-box li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--golden);
+            font-weight: bold;
+        }
+
+        .highlight-badge {
+            display: inline-block;
+            background: var(--burnt-orange);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        footer {
+            background: var(--deep-green);
+            color: white;
+            padding: 60px 20px 40px;
+            text-align: center;
+        }
+
+        footer h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        footer p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .social-links {
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            color: var(--golden);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: white;
+        }
+
+        .directions-btn {
+            display: inline-block;
+            background: var(--golden);
+            color: var(--charcoal);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(212, 165, 116, 0.3);
+        }
+
+        .directions-btn:hover {
+            background: white;
+            color: var(--deep-green);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 165, 116, 0.4);
+        }
+
+        .directions-btn::before {
+            content: '🧭 ';
+            margin-right: 8px;
+        }
+
+        .map-container {
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .preview-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .preview-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .preview-img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 968px) {
+            .location-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .location-container:nth-child(even) {
+                direction: ltr;
+            }
+
+            .location-image {
+                height: 400px;
+                transform: rotate(0deg);
+            }
+
+            .location-number {
+                font-size: 5rem;
+            }
+        }
+
+        .decorative-element {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--golden);
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .deco-1 {
+            top: 10%;
+            right: -150px;
+        }
+
+        .deco-2 {
+            bottom: 20%;
+            left: -150px;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Mahaweli</h1>
+            <p class="subtitle">Journey Through Ancient Wonders</p>
+        </div>
+        <div class="scroll-indicator">↓ EXPLORE</div>
+    </section>
+
+    <section class="intro-section">
+        <h2>Discover Sri Lanka's Crown Jewels</h2>
+        <p>Journey through the magnificent Mahaweli region, where ancient kingdoms meet pristine nature. From UNESCO World Heritage sites to tranquil lakes, every destination tells a story of timeless beauty and cultural heritage.</p>
+    </section>
+
+    <section class="location-section">
+        <div class="decorative-element deco-1"></div>
+        <div class="decorative-element deco-2"></div>
+
+       1 <div class="location-container">
+            <div class="location-image">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgL4cOqdSUG9c_Pnoi5_K0wLpkItkaRvSKBsysr5xG5JPEvPRFppTOnAOErgZMkO8QfqU6WfToHNqxn59joC8aMlyiSX5ifwff-8suiohdpjaaI5Q7MAw7y4-2cGrdSj_9pbbaMf1y6J3M/s1600/Udawalawe+National+Park+-+Udawalawe+Dam+Sri+Lanka+3.png" alt="Udawalawe Reservoir">
+            </div>
+            <div class="location-content">
+                <div class="location-number">01</div>
+                <span class="highlight-badge">UNESCO World Heritage</span>
+                <h3>Udawalawe Reservoir</h3>
+                <p>The Udawalawe Reservoir, located in the Ratnapura and Monaragala districts of Sri Lanka, is a critical reservoir constructed under the Mahaweli Irrigation Project in 1969. It contributes to the supply of water for irrigation, hydroelectricity generation and domestic consumption. The reservoir plays a vital role in supporting dry zone agriculture, particularly paddy cultivation, in the southern region. Its catchment area supports the Udawalawe National Park and is also a hub for tourism, enhancing biodiversity..</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.8364524168793!2d80.75629631477614!3d7.956963694287014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca5d0d5f8f1e3%3A0x3e1d8d9f5e6f5b8a!2sSigiriya%20Rock%20Fortress!5e0!3m2!1sen!2slk!4v1234567890123" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <a href="https://maps.app.goo.gl/rmhDbbrKbSrJSYUD7" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+       2 <div class="location-container">
+            <div class="location-image">
+                <img src="https://i0.wp.com/amazinglanka.com/wp/wp-content/uploads/2024/08/chandrika-01.jpg?resize=768%2C432&ssl=1" alt="Chandrika Lake">
+            </div>
+            <div class="location-content">
+                <div class="location-number">02</div>
+                <span class="highlight-badge">UNESCO World Heritage</span>
+                <h3>Chandrika Lake</h3>
+                <p>The Chandrika Wewa Reservoir in Embilipitiya, located in the Ratnapura District near the Hambantota border, is one of the largest reservoirs built in Sri Lanka after gaining independence. The Chandrika Wewa project marked the first phase of a broader plan to irrigate a large portion of the Walawe Ganga river basin, initially targeting 5,000 acres of farmland. It was followed by the Udawalawe Project, which aimed to bring 50,000 acres under cultivation. The third phase of the initiative was the Samanala Wewa Project, situated closer to the river’s source, and it was designed to irrigate an additional 40,000 acres (Amunugama, 1965)..</p>
+                
+               
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/ghxEapfmxkpu9tEp8" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+3     <div class="location-container">
+            <div class="location-image">
+                <img src=https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzBkwKP3fNvC6NMIkfvmWBYJxNR0Sf-yQWq28-gCLPoyAoq9fmOIzrvmFyUOvjlcmGxvkCiMZePhXsp8gqukGJYvmxtWRcZQYYUHOZfQNJU3fdF90eAnmkZmk_OFXBrsdOZhX0=w408-h460-k-no alt="Samanala Wewa">
+            </div>
+            <div class="location-content">
+                <div class="location-number">03</div>
+                <span class="highlight-badge">UNESCO World Heritage</span>
+                <h3>Samanala Wewa</h3>
+                <p>The Samanalawewa project gained significant attention due to water leakage problems encountered during its initial trial impoundment (Laksiri, 2007; Laksiri et al., 2005). In October 1992 a flat water table was observed up to a distance of 2.5 km on the right bank of the dam and also, a landslip occurred approximately 300 m downstream of the dam generating serious concern amongst the local residents that the dam was failing and there would be a serious loss of life (Khaniya et al., 2020; Laksiri et al., 2005; Udayakumara & Gunawardena, 2018). As a result of these incidents, it was decided to reduce the water level of the reservoir to 430 m and this level is maintained until the present time (Laksiri, 2007; Udayakumara & Gunawardena, 2018).
+
+Several remedial measures such as grout curtain and wet blanketing were undertaken to seal off the leakage but all the attempts failed (Laksiri et al., 2009; Udayakumara & Gunawardena, 2018). Therefore, the reservoir is still operating with a continuous water leakage of 1,800 litres per second (Laksiri, 2007; Laksiri et al., 2005).</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.8364524168793!2d80.75629631477614!3d7.956963694287014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca5d0d5f8f1e3%3A0x3e1d8d9f5e6f5b8a!2sSigiriya%20Rock%20Fortress!5e0!3m2!1sen!2slk!4v1234567890123" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <a href="https://maps.app.goo.gl/ozDqrgNJ3wp1mnH17" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+2 <div class="location-container">
+            <div class="location-image">
+                <img src="https://lakpura.com/cdn/shop/files/LK95A20000-10-E.jpg?v=1702441922&width=3840" alt="Kiriibban Wewa">
+            </div>
+            <div class="location-content">
+                <div class="location-number">04</div>
+                <h3>Kiriibban Wewa</h3>
+                <p>Kiriibbanwewa (කිරිඉබ්බන් වැව) refers to a significant reservoir (tank) and surrounding area in the Moneragala District of Uva Province, Sri Lanka, known for its scenic beauty, rich biodiversity, and proximity to Udawalawe National Park, making it a popular spot for nature tourism, hiking, birdwatching, and cultural experiences, with accommodations and activities available for visitors exploring the region's natural heritage. </p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/gfNQCrWRwC7GWEWq7" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+        
+<div class="location-container">
+            <div class="location-image">
+                <img src="https://lakpura.com/cdn/shop/files/LK95A20000-10-E.jpg?v=1702441922&width=3840" alt="Mahagama Tank">
+            </div>
+            <div class="location-content">
+                <div class="location-number">05</div>
+                <h3>Mahagama Tank/Urusita Wewa </h3>
+                <p>Urusita Wewa (or Urusawa Tank) is a significant ancient Sri Lankan reservoir, famous for its remarkably preserved, unique stone-carved seven-hooded cobra guardstone (Naga sculpture) and the ancient Bisokotuwa (valve-pit), showcasing sophisticated ancient hydraulic engineering, dating back to the Anuradhapura period (around the 3rd Century BC) in the Moneragala District. This site highlights the advanced water management and cultural beliefs of the Sinhala people, with the cobra symbolizing water protection, and is a key historical landmark near the Hambantota-Suriyawewa road</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/kGtaoz1YRWVLNRsR7" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+<div class="location-container">
+            <div class="location-image">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhwILGVQl1cexK7BmBhc1fnMoSiXqeI59WxktpCKlA2PUc-eDuio7xXs1ZqjH8w4tAgVid5Z9cxcF6G1_wLAqBXUiSDSylbTvfT9dGkkP0mwFD9Zq2ycsPaAc_8wXAjLRJOSXhpZUfH_6fN/w600-h337-p-k-no-nu/Rajanganaya+Reservoir+-+Lankapradeepa.JPG" alt="Ridiyagama Tank">
+            </div>
+            <div class="location-content">
+                <div class="location-number">06</div>
+                <h3>Ridiyagama Tank</h3>
+                <p>The Ridiyagama Tank (Wewa) in Sri Lanka's Hambantota District is a significant reservoir built under the Walawe Ganga Left Bank Scheme, constructed between 1923-1928, featuring a 1.5-mile bund and two spillways, serving as a crucial water source for irrigation and notably associated with the nearby Ridiyagama Farm and Safari Park, attracting visitors with its vast water body and surrounding attractions. </p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/uFKva2hLAWtckEmJ8" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+<div class="location-container">
+            <div class="location-image">
+                <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSwOQxWafqmzyNCY7GdM-D2FEFfDnPZxJEpPacAHJBulZV9f3W6tT3XLmNU-IdXh1k_WTQsfhMT_jkevbCKf7-lUih0tI-lmeFrDVSSSx3RcbsG1J_tkAPgfy1pNHm3Bgzkh0QI4=w408-h306-k-no" alt="Habaralu Wewa">
+            </div>
+            <div class="location-content">
+                <div class="location-number">07</div>
+                <h3>Habaralu Wewa</h3>
+                <p>The Habaraluwa Lake is a reservoir located in the Sevanagala area of ​​the Monaragala District of Sri Lanka. Built primarily for irrigation, it plays an important role in supporting agriculture in the region.</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/y897LiCPxZczwXtK9" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+<div class="location-container">
+            <div class="location-image">
+                <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSwVQUFnQEwK262nHOw8-dbcboo0VgQ8qPYfoLkEOvmmgIW4WunaesxQHzyz0yE2MKbE4bQMm2DOO6bNN3x_Tyje5eUqJ3_HRIzqWHcmFa6ATPkQ8yBPGlQbxdmHlYStpKOXga-o=w408-h306-k-no" alt="Katupila Lake">
+            </div>
+            <div class="location-content">
+                <div class="location-number">08</div>
+                <h3>Katupila Lake</h3>
+                <p>This is very nice and safe place to have a bath with kids and family. Few smaller shops are around that you could get some fried fish , rotti and some basic food!</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/75wJrEi2M57DEfEHA" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+<div class="location-container">
+            <div class="location-image">
+                <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzwie39Lae0JTtRdtGq2cg8tkw7G7tQMTDwhEYgMBBTkAgOkV_gzCsYBNP-bMsmGfkQzxoCtOfF44HdwXm-UjuSyHA1zMkJPxbvVT3bcP1KSXv8zPhEWDe6eZBh1ulCA-GtMqQfEVint3WI=w408-h306-k-no" alt="Liyangastota amuna">
+            </div>
+            <div class="location-content">
+                <div class="location-number">09</div>
+                <h3>Liyangastota amuna</h3>
+                <p>Liyangastota Amuna is a historic British-built diversion weir (anicut) on the Walawe Ganga River, constructed in 1889 to supply water to reservoirs like Ridiyagama and Kadawara via its left bank channel, with the right bank feeding Mamadola and Oluvila tanks. This 73m long, 5.8m high structure is a popular spot for nature lovers, photographers, and safe bathing during low water, featuring sluices and providing a glimpse into Sri Lanka's ancient and colonial irrigation engineering. </p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/BDCWhKixgdDN8VRd8" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+<div class="location-container">
+            <div class="location-image">
+                <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzrlKbIZz2qUSqTSNqzHkhd7wKLAG4yTuVxiexLGn343hBxMV3zhjkw2DT6uf9sOGV-py6O_EXKY13EChWoUFesnNJ5ovW_A_W4-Wtm39DK_pnBq_QU-fPZuW0lyKK9aJfr9fr_hw=w408-h408-k-no" alt="Udawalawe National Park">
+            </div>
+            <div class="location-content">
+                <div class="location-number">10</div>
+                <h3>Udawalawe National Park</h3>
+                <p>Udawalawe National Park in Sri Lanka is famous for its large, guaranteed elephant sightings, vast grasslands, and the Udawalawe Reservoir, offering a prime safari destination with diverse wildlife like buffalo, deer, crocodiles, and numerous bird species in a dry-zone landscape with scrub and forest. Established to protect displaced animals and the reservoir's catchment, it's a year-round park, best visited early morning for cooler temperatures and active animals.</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/5zshdfvPHZ11L8ia9" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+<div class="location-container">
+            <div class="location-image">
+                <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzeTTeLpFuBSY_atvILZFmv60pVsFhT4Z9V-fMzQXoPO5HtYbea9LazG0m6MHAEms5_gpSlFOOblLg0XmuCOI_mpvN7SUiVDerEe25il8SIuikyBD5avmVZcWihyRbc3UGxt9BI6Q=w408-h270-k-no" alt="Sinharaja Rain forest">
+            </div>
+            <div class="location-content">
+                <div class="location-number">11</div>
+                <h3>Sinharaja Rain forest</h3>
+                <p>The Sinharaja Forest Reserve is Sri Lanka's last significant lowland tropical rainforest, a UNESCO World Heritage Site known for its exceptional biodiversity, especially endemic species of flora and fauna, including rare birds, reptiles, and plants. Located in the southwest, it's a narrow, ridge-filled area crisscrossed by streams, featuring dense vegetation, high rainfall, and trekking trails leading to peaks like Moulawella and Sinhagala. .</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/zfHyHkj3hv8DkstM9" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+<div class="location-container">
+            <div class="location-image">
+                <img src="https://lh3.googleusercontent.com/p/AF1QipNtzk-JJjuIsh1G7Vp2eVTxDKURzoqNDYA8Te-1=w408-h271-k-no" alt="Lunugamvehera National Park">
+            </div>
+            <div class="location-content">
+                <div class="location-number">12</div>
+                <h3>Lunugamvehera National Park</h3>
+                <p>Lunugamvehera National Park is a less crowded Sri Lankan dry zone park (established 1995) in Uva Province, crucial as an elephant corridor between Yala & Udawalawe, known for its vast Lunugamvehera Reservoir, dry forests, grasslands, abundant elephants, wild buffalo, and diverse water birds, offering a quieter wildlife experience with opportunities to see leopards, sloth bears, and reptiles. .</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/W5xgoL9oogFjxaWe8" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+<div class="location-container">
+            <div class="location-image">
+                <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSw9qiNT6wUQ74TfR_LVE97iyC6pNZBrkAcHfCBP-mX2oFHChPahj7-lqTNZCcEY9LVwgm8NmhUHJlAdChjmZNVovszUAkat1eLvXzdDV4COnF6ztyUuIQ5NEUNjODH8sEoEhTrB=w408-h272-k-no" alt="Yala National Park">
+            </div>
+            <div class="location-content">
+                <div class="location-number">13</div>
+                <h3>Yala National Park</h3>
+                <p>Yala National Park is a national park in Sri Lanka, bordering the Indian Ocean and covering 979 km2 (378 sq mi). It was designated as a wildlife sanctuary in 1900. It hosts diverse ecosystems ranging from moist monsoon forests to freshwater and marine wetlands, and is important for the conservation of Sri Lankan elephants, Sri Lankan leopards and 44 mammal species. It is one of the 70 Important Bird Areas in Sri Lanka harbouring 215 bird species including six endemic species of Sri Lanka.
+
+The area around Yala National Park has hosted several ancient civilizations. Two important Buddhist pilgrim sites, Sithulpahuwa and Magul Vihara, are situated within the park. The 2004 Indian Ocean earthquake and tsunami caused severe damage on the Yala National Park, and 250 people died in its vicinity..</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/hy49kwPsLLQ1uHGK6" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+<div class="location-container">
+            <div class="location-image">
+                <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxgksF7HXqYJrmja4cjuZFbFmIhc0GZh8F71rUmCb8q4EPM3MYXxB3gKOHK27vtQdWQg1FVHK6_j40riGe3Vj42MtsBBULbyrWu1YMjEnCvpQuRAgAZo5JXg3suKRdNLREhyUc=w408-h306-k-no" alt="Ussangoda National Park">
+            </div>
+            <div class="location-content">
+                <div class="location-number">14</div>
+                <h3>Ussangoda National Park</h3>
+                <p>Ussangoda National Park in Sri Lanka is famous for its unique red, barren landscape, believed to be caused by a meteorite impact or high ferric oxide, creating a "Martian" feel with stunted grass, linked to Ramayana legends as King Ravana's landing site. This coastal park protects sea turtle breeding grounds, rare plants, and archaeological sites, offering stunning sea views where red earth meets the turquoise ocean, contrasting with lush surroundings. </p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/DVrWUb291y6muwQo8" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+<div class="location-container">
+            <div class="location-image">
+                <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSyQoQI-gh7aCftEW-GwcVCw2dxhoG8XhW-weA_jqO8c6N3aTGYMnYAyjNKk8I25-N7Pyx09ffkrKfEX9NX_P-oOLD8DC3xuzyCW9Ko2m5hG3FY69IbrF4aTj9UG9t-klHZvQZ2N=w408-h408-k-no" alt="Duwili Ella Waterfall">
+            </div>
+            <div class="location-content">
+                <div class="location-number">15</div>
+                <h3>Duwili Ella Waterfall</h3>
+                <p>Duvili Ella or Walawe Ganga East Falls[1] (Sinhala: දූවිලි ඇල්ල) is a waterfall in Ratnapura District, Sri Lanka. It is located in Thanjantenna village, which is about 4 km (2.5 mi) away from Balangoda.[2] The height of the waterfalls is about 40 m (130 ft).[3] The name 'Duwili' is derived from the Sinhalese for dust, which describes the spray emanating from the waterfall.[1]
+
+It is located in Thanjantenna village, which is about 27 km away from Balangoda.</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/gQTNSNASZs1NrurJ9" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+<div class="location-container">
+            <div class="location-image">
+                <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzCO2zR3k231Dr4kjcvyq_aC4IuvNsDhPT8JaiW_GDsbYXQvsyjiWFRtT-zqfcQnyTgkddgQKMvQsdIZBsJPIiYf18LKysZjFnavU8DRG-BNcVuxsOvfbDm6wvohkMmLWaiymzI=w408-h306-k-no" alt="Madunagala Hot Water Spring">
+            </div>
+            <div class="location-content">
+                <div class="location-number">16</div>
+                <h3>Madunagala Hot Water Spring</h3>
+                <p>In the 2000’s this spring was identified to be developed into a major tourist attraction. Today four wells have been built surrounding the main spring with varying degrees of temperature. The area is now landscaped and separate changing rooms and toilets for the two sexes also have been built. A play area, a mini zoo, and an aquarium have also been built for the children. To enter the area,  Rs 60 is charged from a local adult and Rs 300 from a foreigner.</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/EpDfbRHzjgG3w38EA" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+<div class="location-container">
+            <div class="location-image">
+                <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSwRoH5Xyb4C5jyWcSll3mUB0A3Q9Ae_6rpW_cKtuNPfRHOJS5Wmo3qrwaIBi9DlLqOO40DzXuyPyP6OHiQD8rrPudiojE_sXGSmhAzQh523z8udjyTm2WdKh_uMabn0s-yQUbYkBg=w408-h306-k-no" alt="Suriyakanda">
+            </div>
+            <div class="location-content">
+                <div class="location-number">17</div>
+                <h3>Suriyakanda</h3>
+                <p>Suriyakanda is a scenic mountain region in Sri Lanka's Southern Province, near the Sinharaja Rainforest, known for its cool climate, misty hills, tea plantations, hiking trails, waterfalls (like Tara Waterfall), and stunning sunrise views, offering a tranquil escape for nature lovers and adventure seekers with nearby accommodation options and access to local culture and wildlife. The journey to Suriyakanda often involves scenic routes like the "Little Eighteen Bend" road from Rakwana, enhancing its appeal as a hidden gem</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/NmtNKcN3XaHTfKxz6" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+<div class="location-container">
+            <div class="location-image">
+                <img src="https://tourism.sg.gov.lk/wp-content/uploads/2020/11/wawulpane-01.jpg" alt="Wavulpane Limestone Cave">
+            </div>
+            <div class="location-content">
+                <div class="location-number">18</div>
+                <h3>Wavulpane Limestone Cave</h3>
+                <p>Waulpane Limestone Cave, near Embilipitiya in Sri Lanka's Ratnapura District, is a massive ancient cave known as the "Cave of Bats," home to hundreds of thousands of bats, ancient fossils, and an impressive internal waterfall that flows year-round. Visitors experience a raw, adventurous trek through slippery paths, navigating a stream and bat guano to see stunning limestone formations (stalactites, stalagmites) and the unique internal waterfall, offering a glimpse into prehistoric geology. .</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.447842834678!2d80.64865131477574!3d7.856938494310743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afca1c787e5e829%3A0x5f8c6b3a9b6e5d3f!2sDambulla%20Cave%20Temple!5e0!3m2!1sen!2slk!4v1234567890124" width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  
+                    <a href="https://maps.app.goo.gl/2jLhC9ubVkjGBK5P6" target="_blank" class="directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+
+    <footer>
+        <h3>Plan Your Mahaweli Adventure</h3>
+        <p>Experience the perfect blend of ancient history, spiritual heritage, and natural beauty. Each destination offers unique memories waiting to be discovered.</p>
+        <div class="social-links">
+            <a href="#">Contact Us(0713071005)</a> | 
+            <a href="#">Plan Your Trip</a> | 
+            <a href="#">Gallery</a>
+        </div>
+        <p style="margin-top: 40px; font-size: 0.9rem; opacity: 0.7;">© 2026 Mahaweli Tourism | Discover Sri Lanka's Heritage</p>
+    </footer>
+</body>
+</html>
